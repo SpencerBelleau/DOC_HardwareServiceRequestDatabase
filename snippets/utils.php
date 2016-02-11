@@ -21,11 +21,11 @@
 	{
 		if($row['complete'] == 0)
 		{
-			$col = "style='background-color:LightCoral'";
+			$col = "style='background-color:#e64a4a'";//
 		}else if ($row['complete'] == 2){
-			$col = "style='background-color:LimeGreen'";
+			$col = "style='background-color:#52CD52'";//Limegreen
 		}else{
-			$col = "style='background-color:Khaki'";
+			$col = "style='background-color:#ffff77'";//Khaki
 		}
 		echo '<table ' . $col . '>';
 		echo '<tr><td style="width:150px"><b>NAME:</b></td><td> ' . $row['firstName'] . " " . $row['lastName'] . '</td></tr>';
@@ -33,7 +33,8 @@
 		echo '<tr><td style="width:150px"><b>PHONE:</b></td><td> ' . $row['phoneNumber'] . '</td></tr>';
 		echo '<tr><td style="width:150px"><b>E-MAIL:</b></td><td> ' . $row['email'] . '</td></tr>';
 		echo '<tr><td style="width:150px"><b>COMPUTER:</b></td><td> ' . $row['computerModel'] . '</td></tr>';
-		echo '<tr><td style="width:150px"><b>SERVICE:</b></td><td> ' . $row['serviceRequested'] . '</td></tr>';
+		echo '<tr><td colspan=2><hr style="border:none;height:1px;color:black;background-color:black"><td></tr>';
+		echo '<tr><td colspan=2><b>SERVICE</b><br/> ' . $row['serviceRequested'] . '</td></tr>';
 		echo '<tr><td colspan=2><b>EXTRA PARTS</b><br/>' . $row['extraParts'] . '</td></tr>';
 		echo '<tr><td style="width:150px"><b>TIME SUBMITTED:</b></td><td> ' . $row['requestTime'] . '</td></tr>';
 		if($row['complete'] == 0)

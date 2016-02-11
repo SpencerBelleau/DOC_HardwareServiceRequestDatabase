@@ -2,14 +2,18 @@
 	require "snippets/dbConn.php";
 	require "snippets/SQLTools.php";
 	require "snippets/utils.php";
-	
+	session_start();
+	if(empty($_SESSION['username']))
+	{
+		header("Location: Login.php");
+	}
 	if (isset($_POST['submission']))
 	{
 		if($_POST['submission'] == "New")
 		{
 			echo "New submission made";
-			$com2 = "INSERT INTO DOC_Hardware_Records (firstName, lastName, address, phoneNumber, email, computerModel, serviceRequested, extraParts, complete) VALUES (:firstName, :lastName, :address, :phoneNumber, :email, :computerModel, :serviceRequested, :extraParts, 0)";
-			executeSQL_Safe_U($com2, $dbConn, ":firstName", $_POST['firstName'], ":lastName", $_POST['lastName'], ":address", $_POST['address'], ":phoneNumber", $_POST['phoneNumber'], ":email", $_POST['email'], ":computerModel", $_POST['computerModel'], ":serviceRequested", $_POST['serviceRequested'], ":extraParts", $_POST['extraParts']);
+			$com2 = "INSERT INTO DOC_Hardware_Records (firstName, lastName, address, phoneNumber, email, computerModel, serviceRequested, extraParts, complete, creatorId) VALUES (:firstName, :lastName, :address, :phoneNumber, :email, :computerModel, :serviceRequested, :extraParts, 0, :creatorId)";
+			executeSQL_Safe_U($com2, $dbConn, ":firstName", $_POST['firstName'], ":lastName", $_POST['lastName'], ":address", $_POST['address'], ":phoneNumber", $_POST['phoneNumber'], ":email", $_POST['email'], ":computerModel", $_POST['computerModel'], ":serviceRequested", $_POST['serviceRequested'], ":extraParts", $_POST['extraParts'], ":creatorId", $_SESSION['userID']);
 		}else if($_POST['submission'] == "Complete"){
 			echo "Service ticket " . $_POST['serviceID'] . " updated.";
 			$com2 = "UPDATE DOC_Hardware_Records SET complete=2 WHERE serviceID=:id";
@@ -23,7 +27,7 @@
 ?>
 <!DOCTYPE html>
 <style>
-	h1, h2{
+	h1, h2, h3{
 		text-align:center;
 	}
 	table{
@@ -32,10 +36,14 @@
 		border:1px solid black;
 		border-radius:4px;
 		width:450px;
+		background-color:
 	}
 </style>
-<body>
-<h1>Digital Otter Center Hardware Service Request Form</h1>
+<body style="background-color:grey">
+<table style="background-color:#002544;width:1000px"><tr><td><h1 style="font-family: Verdana;color:#A29051">Digital Otter Center Hardware Service Request Form</h1></td></tr></table>
+<?php
+echo "<h3>Logged in as <a href='Logout.php'>" . $_SESSION['name'] . "</a>, click to log out</h3>";
+?>
 
 <table style="background-color:lightblue">
 	<form method="post">
@@ -113,11 +121,40 @@
 	</tr>
 	</form>
 </table>
-
 <?php
 	echo '<h2> Existing Service Requests </h2>';
 	$com1 = "SELECT * FROM DOC_Hardware_Records ORDER BY complete ASC, requestTime ASC";
 	$fetched = executeSQL($com1, $dbConn);
+	echo "<table style='width:1500px;border-collapse: collapse;'><tr style='text-align:center;border: none;'><td style='border-right: solid 1px black;border-left: solid 1px black;'><h2>OPEN</h2></td><td style='border-right: solid 1px black;border-left: solid 1px black;'><h2>STARTED</h2></td><td style='border-right: solid 1px black;border-left: solid 1px black;'><h2>FINISHED</h2></td></tr><tr style='border: none;'><td valign='top' style='border-right: solid 1px black;border-left: solid 1px black;'>";
+	foreach($fetched as $a)
+	{
+		if($a['complete'] == 0)
+		{
+			drawTicket($a);
+			echo '<br/>';
+		}
+	}
+	echo "</td><td valign='top' style='border-right: solid 1px black;border-left: solid 1px black;'>";
+	foreach($fetched as $a)
+	{
+		if($a['complete'] == 1)
+		{
+			drawTicket($a);
+			echo '<br/>';
+		}
+	}
+	echo "</td><td valign='top' style='border-right: solid 1px black;border-left: solid 1px black;'>";
+	foreach($fetched as $a)
+	{
+		if($a['complete'] == 2)
+		{
+			drawTicket($a);
+			echo '<br/>';
+		}
+	}
+	
+	echo "</td></tr></table>";
+	/*
 	foreach($fetched as $a)
 	{
 		drawTicket($a);
@@ -144,7 +181,7 @@
 			echo '</td></form></tr>';
 		}
 		echo '</table>';*/
-	}
+	//}
 	//SQLTable($fetched, array("ID", "First Name", "Last Name", "Computer Model", "Service Requested", "Extra Parts", "Finished", "Time Requested"));
 ?>
 
