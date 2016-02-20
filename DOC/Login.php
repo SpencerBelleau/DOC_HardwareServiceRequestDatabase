@@ -23,7 +23,21 @@
 			$_SESSION['username'] = $ret[0]['username'];
 			$_SESSION['userID'] = $ret[0]['userId'];
 			$_SESSION['name'] = $ret[0]['firstName'] . " " . $ret[0]['lastName'];
-			header("Location: Index.php");
+			//Check to see if last timestamp was closed
+			$com1 = "SELECT timeOut, timestampId FROM DOC_Timestamps WHERE userId = :id ORDER BY timestampId DESC";
+			$ret = executeSQL_Safe($com1, $dbConn, ":id", $_SESSION['userID']);
+			if($ret[0]['timeOut'] == '0000-00-00 00:00:00')
+			{
+				$com2 = "UPDATE DOC_Timestamps SET timeOut = :timeOut, forgotSignout = 1 WHERE userId = :id AND timestampId = :timestampId";
+				executeSQL_Safe_U($com2, $dbConn, ":timeOut", date("Y-m-d H:i:s"), ":id",  $_SESSION['userID'], ":timestampId", $ret[0]['timestampId']);
+			}
+			//Make a new timestamp
+			$com2 = "INSERT INTO DOC_Timestamps (userId) VALUES (:id)";
+			executeSQL_Safe_U($com2, $dbConn, ":id", $_SESSION['userID']);
+			$com3 = "SELECT MAX(timestampId) as timeId FROM DOC_Timestamps WHERE userId = :id";
+			$ret = executeSQL_Safe($com3, $dbConn, ":id", $_SESSION['userID']);
+			$_SESSION['sessionId'] = $ret[0]['timeId'];
+			header("Location: ../Mockups/mockup.php");
 		}
 	}
 ?>

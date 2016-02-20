@@ -15,17 +15,21 @@
 			$com2 = "INSERT INTO DOC_Hardware_Records (firstName, lastName, address, phoneNumber, email, computerModel, serviceRequested, extraParts, complete, creatorId) VALUES (:firstName, :lastName, :address, :phoneNumber, :email, :computerModel, :serviceRequested, :extraParts, 0, :creatorId)";
 			executeSQL_Safe_U($com2, $dbConn, ":firstName", $_POST['firstName'], ":lastName", $_POST['lastName'], ":address", $_POST['address'], ":phoneNumber", $_POST['phoneNumber'], ":email", $_POST['email'], ":computerModel", $_POST['computerModel'], ":serviceRequested", $_POST['serviceRequested'], ":extraParts", $_POST['extraParts'], ":creatorId", $_SESSION['userID']);
 		}else if($_POST['submission'] == "Complete"){
-			echo "Service ticket " . $_POST['serviceID'] . " updated.";
-			$com2 = "UPDATE DOC_Hardware_Records SET complete=2 WHERE serviceID=:id";
-			executeSQL_Safe_U($com2, $dbConn, ":id", $_POST['serviceID']);
+			//echo "Service ticket " . $_POST['serviceID'] . " updated.";
+			$com2 = "UPDATE DOC_Hardware_Records SET complete=2, closeTime = :closeTime, closerId = :closerId WHERE serviceID=:id";
+			executeSQL_Safe_U($com2, $dbConn, ":id", $_POST['serviceID'], ":closeTime", date("Y-m-d H:i:s"), ":closerId", $_SESSION['userID']);
 		}else if($_POST['submission'] == "Open"){
-			echo "Service ticket " . $_POST['serviceID'] . " updated.";
-			$com2 = "UPDATE DOC_Hardware_Records SET complete=1 WHERE serviceID=:id";
-			executeSQL_Safe_U($com2, $dbConn, ":id", $_POST['serviceID']);
+			//echo "Service ticket " . $_POST['serviceID'] . " updated.";
+			$com2 = "UPDATE DOC_Hardware_Records SET complete=1, openTime = :openTime, openerId = :openerId WHERE serviceID=:id";
+			executeSQL_Safe_U($com2, $dbConn, ":id", $_POST['serviceID'], ":openTime", date("Y-m-d H:i:s"), ":openerId", $_SESSION['userID']);
 		}
 	}
 ?>
 <!DOCTYPE html>
+<head>
+	<!--External Style Sheet-->
+	<link rel="stylesheet" type="text/css" href="MyStyles.css">
+</head>
 <style>
 	h1, h2, h3{
 		text-align:center;
@@ -36,8 +40,31 @@
 		border:1px solid black;
 		border-radius:4px;
 		width:450px;
-		background-color:
 	}
+	.blackBar{
+		border:none;
+		height:1px;
+		color:black;
+		background-color:black;
+	}
+	/*
+	button{
+		width:100%;
+		background-color: lightgrey;
+	    border: 1px solid black;
+	    border-radius: 2px;
+	    color: #002544;
+	    padding: 15px 32px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	    -webkit-transition-duration: 0.2s;
+    	transition-duration: 0.2s;
+	}
+	button:hover{
+		background-color: white;
+	}*/
 </style>
 <body style="background-color:grey">
 <table style="background-color:#002544;width:1000px"><tr><td><h1 style="font-family: Verdana;color:#A29051">Digital Otter Center Hardware Service Request Form</h1></td></tr></table>
@@ -106,24 +133,29 @@ echo "<h3>Logged in as <a href='Logout.php'>" . $_SESSION['name'] . "</a>, click
 			Service Requested:
 		</td>
 		<td>
-			<input style="width:98%" type="text" name="serviceRequested">
+			<input style="width:98%" type="text" maxlength="100" name="serviceRequested">
 		</td>
 	</tr>
 	<tr>
 		<td colspan=2 style="text-align:center">
-			List Extra Parts: <br/><textarea name="extraParts" rows=4>[none]</textArea>
+			List Extra Parts: <br/><textarea name="extraParts" maxlength="100" rows=4>[none]</textArea>
 		</td>
 	</tr>
 	<tr>
 		<td colspan=2>
-			<input type="submit" value="Submit Request" style="width:100%">
+			<input type="submit" value="Submit Request" class="greyButton" style="width:100%">
 		</td>
 	</tr>
 	</form>
 </table>
 <?php
 	echo '<h2> Existing Service Requests </h2>';
-	$com1 = "SELECT * FROM DOC_Hardware_Records ORDER BY complete ASC, requestTime ASC";
+	$com1 = "SELECT DHR.serviceID, DHR.firstName, DHR.lastName, DHR.address, DHR.phoneNumber, DHR.email, DHR.computerModel, DHR.serviceRequested, DHR.extraParts, DHR.complete, Du1.firstName as CreatorF, Du1.lastName as CreatorL, Du2.firstName as OpenerF, Du2.lastName as OpenerL, Du3.firstName as CloserF, Du3.lastName as CloserL, DHR.requestTime, DHR.openTime, DHR.closeTime
+			FROM DOC_Hardware_Records DHR
+				Join DOC_Users Du1 on DHR.creatorId = Du1.userId
+				Join DOC_Users Du2 on DHR.openerId = Du2.userId
+				Join DOC_Users Du3 on DHR.closerId = Du3.userId
+			ORDER BY complete ASC, requestTime ASC";
 	$fetched = executeSQL($com1, $dbConn);
 	echo "<table style='width:1500px;border-collapse: collapse;'><tr style='text-align:center;border: none;'><td style='border-right: solid 1px black;border-left: solid 1px black;'><h2>OPEN</h2></td><td style='border-right: solid 1px black;border-left: solid 1px black;'><h2>STARTED</h2></td><td style='border-right: solid 1px black;border-left: solid 1px black;'><h2>FINISHED</h2></td></tr><tr style='border: none;'><td valign='top' style='border-right: solid 1px black;border-left: solid 1px black;'>";
 	foreach($fetched as $a)
@@ -154,35 +186,6 @@ echo "<h3>Logged in as <a href='Logout.php'>" . $_SESSION['name'] . "</a>, click
 	}
 	
 	echo "</td></tr></table>";
-	/*
-	foreach($fetched as $a)
-	{
-		drawTicket($a);
-		echo '<br/>';
-		/*
-		if($a['complete'] == 0)
-		{
-			$col = "style='background-color:LightCoral'";
-		}else{
-			$col = "style='background-color:LimeGreen'";
-		}
-		echo '<table border=1>';
-		echo '<tr><td ' . $col . '>' . $a['firstName'] . '</td><td ' . $col . '>' . $a['lastName'] . '</td></tr>';
-		echo '<tr><td colspan=2 ' . $col . '>' . $a['address'] . '</td></tr>';
-		echo '<tr><td ' . $col . '>' . $a['phoneNumber'] . '</td><td ' . $col . '>' . $a['email'] . '</td></tr>';
-		echo '<tr><td ' . $col . '>' . $a['computerModel'] . '</td><td ' . $col . '>' . $a['serviceRequested'] . '</td></tr>';
-		echo '<tr><td colspan=2 ' . $col . '>' . $a['extraParts'] . '</td></tr>';
-		if($a['complete'] == 0)
-		{
-			echo '<tr><form method="post"><td colspan=2>';
-			echo '<input type="hidden" name="submission" value="Update">';
-			echo '<input type="hidden" value="'. $a['serviceID'] .'" name="serviceID">';
-			echo '<input style="width:100%" type="submit" value="Complete">';
-			echo '</td></form></tr>';
-		}
-		echo '</table>';*/
-	//}
-	//SQLTable($fetched, array("ID", "First Name", "Last Name", "Computer Model", "Service Requested", "Extra Parts", "Finished", "Time Requested"));
 ?>
 
 </body>

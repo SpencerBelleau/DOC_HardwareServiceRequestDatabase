@@ -1,0 +1,134 @@
+.blackBarHr {
+	border:none;
+	height:1px;
+	color:black;
+	background-color:black;
+}
+
+.navyBarHr {
+	border:none;
+	height:1px;
+	color:black;
+	background-color:#002544;
+}
+
+textarea {
+    resize: none;
+}
+
+ul{
+	overflow:hidden;
+	overflow-y:scroll;
+}
+
+.roundedTable {
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid black;
+	border-radius:4px;
+	width:450px;
+}
+
+.BBSmessage {
+	width:95%;
+	color:#002544;
+	background-color:#A29051;
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid black;
+	border-radius:4px;
+}
+
+.timeIOValid {
+	width:90%;
+	color:#002544;
+	background-color:#A29051;
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid black;
+	border-radius:4px;
+}
+
+.timeIOInValid {
+	width:90%;
+	color:black;
+	background-color:#e64a4a;
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid black;
+	border-radius:4px;
+}
+	
+/*
+ * Ticket Table Styles
+ * Prepackaged for your convenience
+ */
+.ticketTableRed {
+	text-align:left;
+	background-color:#e64a4a;
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid black;
+	border-radius:4px;
+	width:450px;
+}
+
+.ticketTableYellow {
+	text-align:left;
+	background-color:#52CD52;
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid black;
+	border-radius:4px;
+	width:450px;
+}
+
+.ticketTableGreen {
+	text-align:left;
+	background-color:#ffff77;
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid black;
+	border-radius:4px;
+	width:450px;
+}
+
+/*
+ * Button Styles
+ * 
+ */
+.greyButton {
+	background-color: #C0C0C0;
+    border: 1px solid black;
+    border-radius: 2px;
+    color: #002544;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.2s;
+   	transition-duration: 0.2s;
+}
+.greyButton:hover {
+	background-color: white;
+}
+
+.brownButton{
+	background-color: #A29051; /* Green */
+	border: 1px solid black;
+	border-radius: 2px;
+	color: #002544;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	font-family: Verdana;
+	font-weight: bold;
+	-webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+}
+.brownButton:hover{
+	background-color: #B2A061;
+}

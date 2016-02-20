@@ -37,6 +37,16 @@
 		$ret = $prep -> fetchAll(PDO::FETCH_ASSOC);//get all table stuff, associative pairs only
 		return $ret; //Return your table
 	}
+	
+	function executeSQL_Safe_Manual()
+	{
+		$args = func_get_args();
+		$prep = $args[1] -> prepare($args[0]); //args[1] will ALWAYS be $dbConn, $args[0] will ALWAYS be a command
+		$antiInject = $args[2]; //Initialize the injection protection array
+		$prep -> execute($antiInject); //execute using the anti-injection array
+		$ret = $prep -> fetchAll(PDO::FETCH_ASSOC);//get all table stuff, associative pairs only
+		return $ret; //Return your table
+	}
 	function executeSQL_Safe_U() //This is the same as the above, but without a return, used for DELETE, INSERT and CHANGE
 	{
 		$args = func_get_args();
