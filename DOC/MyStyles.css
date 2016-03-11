@@ -9,7 +9,7 @@
 	border:none;
 	height:1px;
 	color:black;
-	background-color:#002544;
+	background-color:#1F346B;/*#002544;*/
 }
 
 textarea {
@@ -22,41 +22,50 @@ ul{
 }
 
 .roundedTable {
+	background-color:#ADD8E6;
 	margin-left:auto;
 	margin-right:auto;
-	border:1px solid black;
+	border:2px outset #9DC8D6;
 	border-radius:4px;
 	width:450px;
+	font-family:Verdana;
+	font-size:14px;
 }
 
 .BBSmessage {
 	width:95%;
-	color:#002544;
-	background-color:#A29051;
+	color:black;/*#002544;*/
+	background-color:#6b551f;
 	margin-left:auto;
 	margin-right:auto;
-	border:1px solid black;
+	border:4px ridge #5b450f;
 	border-radius:4px;
+	font-family:Verdana;
+	font-size:14px;
 }
 
 .timeIOValid {
 	width:90%;
-	color:#002544;
-	background-color:#A29051;
+	color:black;/*#002544;*/
+	background-color:#6b551f;
 	margin-left:auto;
 	margin-right:auto;
-	border:1px solid black;
+	border:4px ridge #5b450f;
 	border-radius:4px;
+	font-family:Verdana;
+	font-size:14px;
 }
 
 .timeIOInValid {
 	width:90%;
-	color:black;
-	background-color:#e64a4a;
+	color:black;/*#002544;*/
+	background-color:#857241;
 	margin-left:auto;
 	margin-right:auto;
-	border:1px solid black;
+	border:4px ridge #756231;
 	border-radius:4px;
+	font-family:Verdana;
+	font-size:14px;
 }
 	
 /*
@@ -64,32 +73,51 @@ ul{
  * Prepackaged for your convenience
  */
 .ticketTableRed {
+	font-family:Verdana;
+	font-size:14px;
 	text-align:left;
-	background-color:#e64a4a;
+	background-color:#DD8080;
+	/*background: linear-gradient(to bottom, #CC9090 0%,#DD9090 10%,#EE9090 25%,#FF9090 50%,#EE9090 75%,#DD9090 90%,#CC9090 100%);
+	/*background-color:#e64a4a;*/
 	margin-left:auto;
 	margin-right:auto;
-	border:1px solid black;
-	border-radius:4px;
+	border:2px outset #BE6060;
+	border-radius:6px;
 	width:450px;
 }
 
 .ticketTableYellow {
+	font-family:Verdana;
+	font-size:14px;
 	text-align:left;
-	background-color:#52CD52;
+	background-color: #DDDD80;
+	/*box-shadow: 
+    	inset 6px 6px #6b551f,
+    	inset -6px -6px #6b551f,
+    	inset -6px 6px #6b551f,
+    	inset 6px -6px #6b551f;
+    padding:6px;
+	/*background: radial-gradient(#EEEE90, #666666);
+	/*background: linear-gradient(to bottom, #CCCC90 0%,#DDDD90 10%,#EEEE90 25%,#FFFF90 50%,#EEEE90 75%,#DDDD90 90%,#CCCC90 100%);
+	/*background-color:#52CD52;*/
 	margin-left:auto;
 	margin-right:auto;
-	border:1px solid black;
-	border-radius:4px;
+	border:2px outset #BEBE60;
+	border-radius:6px;
 	width:450px;
 }
 
 .ticketTableGreen {
+	font-family:Verdana;
+	font-size:14px;
 	text-align:left;
-	background-color:#ffff77;
+	background-color: #80DD80;
+	/*background: linear-gradient(to bottom, #90CC90 0%,#90DD90 10%,#90EE90 25%,#90FF90 50%,#90EE90 75%,#90DD90 90%,#90CC90 100%);
+	/*background-color:#ffff77;*/
 	margin-left:auto;
 	margin-right:auto;
-	border:1px solid black;
-	border-radius:4px;
+	border:2px outset #60BE60;
+	border-radius:6px;
 	width:450px;
 }
 
@@ -99,26 +127,32 @@ ul{
  */
 .greyButton {
 	background-color: #C0C0C0;
-    border: 1px solid black;
-    border-radius: 2px;
-    color: #002544;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    -webkit-transition-duration: 0.2s;
-   	transition-duration: 0.2s;
+	border: 1px outset #D0D0D0;
+	border-radius: 4px;
+	color: #000000;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family:Verdana;
+	font-size: 16px;
+	font-weight: bold;
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
 }
 .greyButton:hover {
 	background-color: white;
 }
 
+.greyButton:active {
+	border: 1px inset #D0D0D0;
+}
+
 .brownButton{
-	background-color: #A29051; /* Green */
-	border: 1px solid black;
-	border-radius: 2px;
-	color: #002544;
+	background-color: #356b1f;/*#A29051;4CA84C*/
+	border: 1px outset #457b2f;/*#B2A061;*/
+	border-radius: 4px;
+	color: white;/*#002544;*/
 	padding: 15px 32px;
 	text-align: center;
 	text-decoration: none;
@@ -130,5 +164,8 @@ ul{
     transition-duration: 0.2s;
 }
 .brownButton:hover{
-	background-color: #B2A061;
+	background-color: #457b2f;/*#B2A061;*/
+}
+.brownButton:active {
+	border: 1px inset #457b2f;/*#B2A061;*/
 }

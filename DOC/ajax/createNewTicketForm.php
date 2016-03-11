@@ -1,5 +1,5 @@
 <?php
-	echo '<table class="roundedTable" style="background-color:lightblue">
+	echo '<table class="roundedTable">
 	<tr>
 		<td colspan=2>
 			<h3 style="text-align:center">New Service Request</h3>

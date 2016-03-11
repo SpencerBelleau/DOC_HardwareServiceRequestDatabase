@@ -11,11 +11,11 @@ session_start();
 	//-----------------------------------------
 	if($newId == 1)
 	{
-		$com2 = "UPDATE DOC_Hardware_Records SET complete=" . $newId . ", openTime = :openTime, openerId = :openerId WHERE serviceID=:id";
-		executeSQL_Safe_U($com2, $dbConn, ":id", $_GET["serviceId"], ":openTime", date("Y-m-d H:i:s"), ":openerId", $_SESSION['userID']);
+		$com2 = "UPDATE DOC_Hardware_Records SET complete=" . $newId . ", openTime = :openTime, openerId = :openerId, delegatedToId = :delegatedToId WHERE serviceID=:id";
+		executeSQL_Safe_U($com2, $dbConn, ":id", $_GET["serviceId"], ":openTime", date("Y-m-d H:i:s"), ":openerId", $_SESSION['userID'], ":delegatedToId", $_GET['delegatedToId']);
 	}else{
-		$com2 = "UPDATE DOC_Hardware_Records SET complete=2, closeTime = :closeTime, closerId = :closerId WHERE serviceID=:id";
-		executeSQL_Safe_U($com2, $dbConn, ":id", $_GET["serviceId"], ":closeTime", date("Y-m-d H:i:s"), ":closerId", $_SESSION['userID']);
+		$com2 = "UPDATE DOC_Hardware_Records SET complete=2, serviceProvided=:service, closeTime = :closeTime, closerId = :closerId WHERE serviceID=:id";
+		executeSQL_Safe_U($com2, $dbConn, ":id", $_GET["serviceId"], ":closeTime", date("Y-m-d H:i:s"), ":closerId", $_SESSION['userID'], ":service", $_GET["service"]);
 	}
 	echo "Service Ticket #" . $_GET["serviceId"] . " updated.";
 ?>

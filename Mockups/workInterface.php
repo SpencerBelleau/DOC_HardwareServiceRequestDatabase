@@ -8,6 +8,7 @@
 		header("Location: ../DOC/Login.php");
 	}
 ?>
+
 <!DOCTYPE html>
 <head>
 	<!-- Title and other stuff -->
@@ -63,108 +64,79 @@
 	<table class="titleTable">
 		<tr>
 			<td>
-				<h1 class="titleText">Digital Otter Center Main Menu MOCKUP</h1>
+				<h1 class="titleText">Digital Otter Center Work Record Interface</h1>
 			</td>
 		</tr>
 	</table>
-	
-	<table class="mainTable" style="height: 400px">
-		<tr style="height: 100%">
-			<td rowspan=2 style="width:50%;height:100%" valign="top">
-				<table class="outlineTable" style="height:100%">
-					<tr style="height:100%">
-						<td style="height:100%">
-							<div id="mainButtons">
-								<button id="newTicketForm" class="brownButton" style="width:100%">Create new ticket</button><br/><br/>
-								<button id="getRecent" class="brownButton" style="width:100%">View all recent tickets</button><br/><br/>
-								<button id="startSearch" class="brownButton" style="width:100%">Search tickets</button><br/><br/>
-								<button id="clear" class="brownButton" style="width:100%">Clear Results</button><br/><br/>
-								<button id="timeReport" class="brownButton" style="width:100%">View Timesheet</button><br/><br/>
-								<button id="printTimeReport" class="brownButton" style="width:100%">Save Timesheet</button>
-							</div>
-							<div id="back">
-								<button id="backButton" class="brownButton" style="width:100%">Back to Main Menu</button>
-							</div>
-							<br/>
-							<div id="content" style="height:475px;overflow:hidden;overflow-y:scroll;">
-								
-							</div>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td style="width:50%">
-				<table class="outlineTable">
-					<tr>
-						<td style="font-family: Verdana;width:30%;text-align:left;color:white">
-							<strong>Signed in as:</strong>
-						</td>
-						<td style="text-align:right;font-family: Verdana;width:70%;color:white">
-							<strong><?php echo $_SESSION['name'] . " (" . $_SESSION['username'] . ")";?></strong>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2>
-							<hr class="navyBarHr">
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2>
-							<button id="logOut" class="brownButton" style="width:100%">Click to Log Out</button>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:50%">
-				<table class="outlineTable">
-					<tr>
-						<td style="width:20%">
-							<div class="centerContent" style="font-family: Verdana;color:white;"><strong>Post to BBS</strong></div>
-						</td>
-						<td style="width:80%">
-							<textarea style="width:98%" maxlength="200" id="newBBStext"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2>
-							<button id="newBBSpost" class="brownButton" style="width:100%">POST!</button>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2>
-							<hr class="navyBarHr">
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2>
-							<div style="height:350px;overflow:hidden;overflow-y:scroll;" id="BBSContent">
-								
-							</div>
-							
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td colspan=2>
-				<div id="collapsibleResults">
-					<table class="outlineTable" style="width:100%">
-						<tr>
-							<td id="results">
-								
-							</td>
-						</tr>
-					</table>
+	<br/>
+	<div class="outlineTable" style="width:750px;margin-left:auto;margin-right:auto;text-align:center">
+		<div>
+			<div style="width:100%;padding-top:10px;vertical-align:top;margin-left:auto;margin-right:auto;text-align:center">
+				<strong style="font-family: Verdana;color:white;">You are logged in as: <?php echo $_SESSION['name'] . " (" . $_SESSION['username'] . ")";?></strong><br/>
+				<div style="padding-top:5px;padding-bottom:5px">
+					<button id="logOut" class="brownButton" style="width:95%;margin-left:auto;margin-right:auto;text-align:center">Click to Log Out</button>
 				</div>
-			</td>
-		</tr>
-	</table>
+			</div>
+		</div>
+		<!--<hr style="width:80%"/>
+		<div style="padding-top: 10px; padding-bottom: 10px">
+			<div style="width:100%;vertical-align:top;margin-left:auto;margin-right:auto;text-align:center">
+				<div class="centerContent" style="font-family: Verdana;color:white;padding-bottom:5px"><strong>Post to BBS</strong></div>
+				<div style="margin-left:auto;margin-right:auto;text-align:center;">
+					<textarea style="width:95%;text-align:center;margin-left:auto;margin-right:auto" maxlength="200" id="newBBStext"></textarea>
+					<button id="newBBSpost" class="brownButton" style="width:95%;margin-left:auto;margin-right:auto">POST!</button>
+				</div><br/>
+				<div style="height:350px;overflow:hidden;overflow-y:scroll;" id="BBSContent">
+					
+				</div>
+			</div>
+		</div>-->
+		<hr style="width:80%"/>
+		<div style="padding-top:10px;padding-bottom:10px">
+			<div id="tickets" style="height:700px;overflow:hidden;overflow-y:scroll;">
+				
+			</div>
+		</div>
+		<hr style="width:80%"/>
+		<div style="padding-top:10px;padding-bottom:10px">
+			<div style="display:inline-block;width:48%">
+				<button id="timeReport" class="brownButton" style="width:100%">View Timesheet</button>
+			</div>
+			<div style="display:inline-block;width:48%">
+				<button id="printTimeReport" class="brownButton" style="width:100%">Save Timesheet</button>
+			</div>
+		</div>
+		<div style="padding:10px" id="times">
+			<button id="backButton" class="brownButton" style="width:98%">Close Report</button><br/><br/>
+			<div id="content" style="height:475px;overflow:hidden;overflow-y:scroll;">
+						
+			</div>
+		</div>
+	</div>
+	
 	<script>
-		setInterval("refreshBBS();",10000);
-		function refreshBBS()
+		$(document).ready(function(){
+			//Collapse content div 
+			$("#times").slideUp(0);
+		});
+		//setInterval("refreshBBS();",10000);
+		setInterval("refreshTickets();", 15000);
+		setInterval("refreshTimesheet();",30000);
+		function refreshTimesheet()
+		{
+			$.ajax(
+				{
+					type: "get",
+					url: "../DOC/ajax/updateTimesheet.php",
+					success:
+						function(data, status)
+						{
+							//$("#BBSContent").html(data);
+						}
+				}
+			);
+		}
+		/*function refreshBBS()
 		{
 			$.ajax(
 				{
@@ -177,7 +149,117 @@
 						}
 				}
 			);
+		}*/
+		function refreshTickets()
+		{
+			//If we're in focus
+			if($('textarea:focus').length > 0)
+			{
+				return;
+			}
+			$.ajax({
+				type: "get",
+				url: "../DOC/ajax/fetchDelegated.php",
+				success:
+					function(data, status)
+					{
+						$("#tickets").html(data);
+					}
+			});
 		}
+		//refreshBBS();
+		refreshTickets();
+		$(document).on('click', 'button', function() {
+			if($(this).attr('id') == "logOut")
+			{
+				document.location.href = "../DOC/Logout.php";
+			}
+			else if($(this).attr('id') == "timeReport")
+			{
+				$("#times").slideUp(500);
+				$.ajax(
+					{
+						type: "get",
+						url: "../DOC/ajax/generateTimeSheet.php",
+						success:
+							function(data, status)
+							{
+								$("#content").html(data);
+								$("#times").slideDown(500);
+							}
+					}
+				);
+			}
+			else if($(this).attr('id') == "backButton")
+			{
+				$("#times").slideUp(500, function(){
+					$("#content").html("");
+				});
+			}
+			else if($(this).attr('id') == "printTimeReport")
+			{
+				$.ajax(
+					{
+						type: "get",
+						url: "../DOC/ajax/saveTimeSheet.php",
+						success:
+							function(data, status)
+							{
+								//Janky download code
+								var hiddenElement = document.createElement('a');
+
+								hiddenElement.href = 'data:attachment/text,' + encodeURI(data);
+								hiddenElement.target = '_blank';
+								hiddenElement.download = 'timesheet.csv';
+								document.body.appendChild(hiddenElement);
+								hiddenElement.click();
+								document.body.removeChild(hiddenElement);
+								//swapMain();
+							}
+					}
+				);
+			}
+			else
+			{
+				var id = $(this).attr('data-ticketid');
+				var currentButton = $(this);
+				var fetch = $(this).parent().parent().parent().children().children().children('.delegateUser').val();
+				var id2 = $(this).parent().parent().parent().children().children().children('.delegateUser').children(":contains('" + fetch +"')").attr("data-userid");
+				var serviceText = $(this).parent().parent().parent().children().children().children().children('.serviceProvided').val();
+				$.ajax(
+					{
+	            		type: "get",
+	            		url: "../DOC/ajax/updateServiceTicket.php",
+	            		data: {
+	            		"serviceId": $(this).attr('data-ticketid'),
+	            		"delegatedToId": id2,
+	            		"service": serviceText,
+	            		},
+	            		success: 
+	            			function(data,status) {
+	            				refreshTickets();
+	            				/*
+	            				$.ajax(
+	            					{
+	            						type: "get",
+	            						url: "../DOC/ajax/fetchTicketById.php",
+	            						data: {
+	            							"id": id,
+	            							"service": serviceText,
+	            						},
+	            						success: 
+	            							function(data, status) {
+	            								currentButton.parent().parent().parent().parent().parent().html(data);
+	            							}
+	            					}
+	            				);*/
+	              			},
+	         		}
+	     		);
+     		}
+     		//End outer AJAX
+		});
+		/*
 		setInterval("refreshTimesheet();",30000);
 		function refreshTimesheet()
 		{
@@ -454,7 +536,6 @@
 					var currentButton = $(this);
 					var fetch = $(this).parent().parent().parent().children().children().children('.delegateUser').val();
 					var id2 = $(this).parent().parent().parent().children().children().children('.delegateUser').children(":contains('" + fetch +"')").attr("data-userid");
-					var serviceText = $(this).parent().parent().parent().children().children().children().children('.serviceProvided').val();
 					$.ajax(
 						{
 		            		type: "get",
@@ -462,7 +543,6 @@
 		            		data: {
 		            		"serviceId": $(this).attr('data-ticketid'),
 		            		"delegatedToId": id2,
-		            		"service": serviceText,
 		            		},
 		            		success: 
 		            			function(data,status) {
@@ -484,6 +564,6 @@
 	         		);
 	         		//End outer AJAX
 				}
-			});
+			});*/
 	</script>
 </body>

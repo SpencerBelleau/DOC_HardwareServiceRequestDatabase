@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>newTicket</title>
+		<meta name="description" content="">
+		<meta name="author" content="Spencer">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<!--<link rel="stylesheet" type="text/css" href="../DOC/MyStyles.css">-->
+		<style>
+			.ticketTableNew {
+				font-family:Verdana;
+				font-size:14px;
+				text-align:left;
+				background: linear-gradient(to bottom, #CCCCCC 0%,#DDDDDD 10%,#EEEEEE 25%,#FFFFFF 50%,#EEEEEE 75%,#DDDDDD 90%,#CCCCCC 100%);
+				/*background: linear-gradient(to bottom, #CCCC90 0%,#DDDD90 10%,#EEEE90 25%,#FFFF90 50%,#EEEE90 75%,#DDDD90 90%,#CCCC90 100%); /*YELLOW*/
+				/*background: linear-gradient(to bottom, #90CC90 0%,#90DD90 10%,#90EE90 25%,#90FF90 50%,#90EE90 75%,#90DD90 90%,#90CC90 100%); /*GREEN*/
+				/*background: linear-gradient(to bottom, #CC9090 0%,#DD9090 10%,#EE9090 25%,#FF9090 50%,#EE9090 75%,#DD9090 90%,#CC9090 100%); /*RED*/
+				margin-left:auto;
+				margin-right:auto;
+				border:2px ridge #BBBBBB;
+				border-radius:6px;
+				width:450px;
+			}
+			
+			.blackBarHr {
+				border:none;
+				height:1px;
+				color:#555555;
+				background-color:#555555;
+			}
+			
+			.newGreyButton {
+				background-color: #C0C0C0;
+			    border: 1px outset #D0D0D0;
+			    border-radius: 4px;
+			    color: #000000;
+			    padding: 15px 32px;
+			    text-align: center;
+			    text-decoration: none;
+			    display: inline-block;
+			    font-size: 16px;
+			    -webkit-transition-duration: 0.2s;
+			   	transition-duration: 0.2s;
+			}
+			.newGreyButton:hover {
+				background-color: white;
+			}
+			.newGreyButton:active {
+				border: 1px inset #D0D0D0;
+			}
+		</style>
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	</head>
+
+	<body>
+		<table class='ticketTableNew' style='display: inline-block;'>
+			<tr>
+				<td style="width:175px">
+					<b>NAME:</b>
+				</td>
+				<td style="width:325px">
+					Joe Otter
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>ADDRESS:</b>
+				</td>
+				<td style="width:325px">
+					CSUMB
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>PHONE:</b>
+				</td>
+				<td style="width:325px"> 
+					123-456-7890
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>E-MAIL:</b>
+				</td>
+				<td style="width:325px"> 
+					jOtter@csumb.edu
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>COMPUTER:</b>
+				</td>
+				<td style="width:325px"> 
+					Macbook Pro
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 style="width:450px">
+					<hr class="blackBarHr">
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 style="width:450px">
+					<b>SERVICE</b><br/> 
+					Ram Change
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 style="width:450px">
+					<b>EXTRA PARTS</b><br/>
+					Power Adapter
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 style="width:450px">
+					<hr class="blackBarHr">
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>SUBMITTED:</b>
+				</td>
+				<td style="width:325px"> 
+					2016-02-05 19:18:58
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>DELEGATED:</b>
+				</td>
+				<td style="width:325px"> 
+					0000-00-00 00:00:00
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>COMPLETED:</b>
+				</td>
+				<td style="width:325px"> 
+					0000-00-00 00:00:00
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 style="width:450px">
+					<hr class="blackBarHr">
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>CREATED BY:</b>
+				</td>
+				<td style="width:325px"> 
+					Spencer Belleau
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>DELEGATED TO:</b>
+				</td>
+				<td style="width:325px"> 
+					<select class="delegateUser">
+						<option data-userid="5">
+							Jeremy Villasenor
+						</option>
+						<option selected="selected" data-userid="1">
+							Spencer Belleau
+						</option>
+						<option data-userid="2">
+							Dylan Barclay
+						</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>DELEGATED BY:</b>
+				</td>
+				<td style="width:325px"> 
+					none 
+				</td>
+			</tr>
+			<tr>
+				<td style="width:175px">
+					<b>COMPLETED BY:</b>
+				</td>
+				<td style="width:325px"> 
+					none 
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 style="width:450px">
+					<div style="text-align:center">
+						<b>SERVICE PROVIDED</b><br/><textarea maxlength="300" style="width:80%" rows=4 class="serviceProvided"></textarea>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan=2>
+					<button class="newGreyButton" data-ticketid="1" style="width:100%">
+						Open
+					</button>
+				</td>
+			</tr>
+		</table>
+		<div id="result">
+			
+		</div>
+		<script>
+			//Get value from dropdown
+			$(document).on('click', 'button', function(){
+				var fetch = $(this).parent().parent().parent().children().children().children().children('.serviceProvided').val();
+				//var id = $(this).parent().parent().parent().children().children().children('.delegateUser').children(":contains('" + fetch +"')").attr("data-userid");
+				//just displaying value
+				$('#result').html(fetch);
+			});
+		</script>
+	</body>
+</html>
